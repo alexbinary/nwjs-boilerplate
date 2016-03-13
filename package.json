@@ -1,0 +1,51 @@
+{
+  "name": "nwjs-boilerplate",
+  "main": "bin/index.html",
+  "window": {
+    "frame": true,
+    "width": 1100,
+    "height": 800
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.5.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  },
+  "config": {
+    "dir_src": "src",
+    "dir_build": "bin"
+  },
+  "scripts": {
+
+    "clean": "rm -rf $npm_package_config_dir_build/*",
+
+    "build:jade": "jade -P $npm_package_config_dir_src --out $npm_package_config_dir_build/",
+    "build:sass": "node-sass $npm_package_config_dir_src -o $npm_package_config_dir_build",
+    "build:coffee": "cjsx -co $npm_package_config_dir_build $npm_package_config_dir_src",
+    "build": "npm run clean && npm run build:jade && npm run build:sass && npm run build:coffee",
+
+    "watch:jade": "jade -wP $npm_package_config_dir_src --out $npm_package_config_dir_build/",
+    "watch:sass": "npm run build:sass && node-sass -w $npm_package_config_dir_src -o $npm_package_config_dir_build",
+    "watch:coffee": "cjsx -wco $npm_package_config_dir_build $npm_package_config_dir_src",
+    "watch": "npm run clean && npm run watch:jade & npm run watch:sass & npm run watch:coffee",
+
+    "start": "/Applications/nwjs.app/Contents/MacOS/nwjs ."
+  },
+  "devDependencies": {
+    "coffee-react": "^4.1.0",
+    "jade": "^1.11.0",
+    "node-sass": "^3.4.2",
+    "nw-dev": "^1.3.1"
+  },
+  "coffeelintConfig": {
+    "max_line_length": {
+      "level": "ignore"
+    },
+    "coffeelint": {
+      "transforms": [
+        "coffee-react-transform"
+      ]
+    }
+  }
+}
